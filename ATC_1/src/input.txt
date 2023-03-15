@@ -1,2 +1,0 @@
-**Time(ms), ID, X(ft), Y(ft), Z(ft), SpeedX, SpeedY, SpeedZ**
-500,69,0,10,15500,100,0,0
