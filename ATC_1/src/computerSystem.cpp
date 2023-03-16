@@ -49,9 +49,9 @@ void ComputerSystem::computeViolations(){
         // to check for Violations: 
         for (int i =0; i < aircraft.size(); i++ ){
             for (int j = i+1; j < aircraft.size();j++){
-                if ( abs(aircraft[i].position_x - aircraft[j].position_x < 3000 &&
-                     abs(aircraft[i].position_y - aircraft[j].position_y < 3000 &&
-                     abs(aircraft[i].position_z - aircraft[j].position_z < 1000)))){
+                if ( abs(aircraft[i].position_x - aircraft[j].position_x < 3000) ||
+                     abs(aircraft[i].position_y - aircraft[j].position_y < 3000) ||
+                     abs(aircraft[i].position_z - aircraft[j].position_z < 1000)){
                         std::cout << "Danger! Safety Violation Detected Aircrafts  "<<aircraft[i].idAircraft << " and " <<
                         aircraft[j].idAircraft << " are  close" << std::endl;
                      } 
