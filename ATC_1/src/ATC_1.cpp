@@ -1,3 +1,4 @@
+
 #ifdef WINDOWS
 #include <direct.h>
 #define GetCurrentDir _getcwd
@@ -7,6 +8,7 @@
 #endif
 #include<iostream>
 #include "Scheduler.h"
+#include "Clock.h"
 using namespace std;
 
 std::string get_current_dir() {
@@ -17,7 +19,20 @@ std::string get_current_dir() {
 }
 
 int main() {
-	Scheduler s = Scheduler();
+	Clock clk;
+	clk.start();
+	Scheduler s = Scheduler(&clk);
 	   //cout << get_current_dir() << endl;
+	while(true)
+	{
+		if(clk.m_running ==false)
+		{
+			clk.stop();
+		}
+		else
+		{
+			sleep(10);
+		}
+	}
 	return 0;
 }

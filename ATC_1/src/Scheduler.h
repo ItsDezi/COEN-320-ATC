@@ -1,10 +1,3 @@
-/*
- * Scheduler.h
- *
- *  Created on: Mar. 13, 2023
- *      Author: Julie
- */
-
 #ifndef SRC_SCHEDULER_H_
 #define SRC_SCHEDULER_H_
 #include <iostream>
@@ -12,13 +5,14 @@
 #include <string>
 #include <string.h>
 #include <list>
+#include "Clock.h"
 using namespace std;
 
 void create_aircraft(string s);
 
 class Scheduler {
 public:
-	Scheduler();
+	Scheduler(Clock* clock_in);
 	//const create_aircraft();
 	virtual ~Scheduler();
 };

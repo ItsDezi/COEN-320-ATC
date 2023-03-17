@@ -1,10 +1,3 @@
-/*
- * Scheduler.cpp
- *
- *  Created on: Mar. 13, 2023
- *      Author: Julien
- */
-
 #include "Scheduler.h"
 #include <iostream>
 #include <fstream>
@@ -13,8 +6,9 @@
 #include <list>
 using namespace std;
 
-Scheduler::Scheduler() {
+Scheduler::Scheduler(Clock* clock_in) {
 	// TODO Auto-generated constructor stub
+	Clock * clk = clock_in;
 	  string line,s;
 	  ifstream myfile;
 	  myfile.open("input.txt");
@@ -40,13 +34,11 @@ Scheduler::~Scheduler() {
 
 void create_aircraft(string s)
 {
-	cout<<s;
 	string ID;
 	int time, x, y, z, speedX, speedY, speedZ;
 	list<int> comma_locations;
     s.erase(std::remove_if(s.begin(), s.end(), ::isspace),
         s.end());
-    cout<<"\n"<<s;
 	for(int i=0;i<s.length();i++)
 	{
 		//cout<<s[i];
