@@ -20,7 +20,7 @@ std::string get_current_dir() {
 
 int main() {
 	Clock clk;
-	clk.start();
+	//clk.start();
 	Scheduler s = Scheduler(&clk);
 	   //cout << get_current_dir() << endl;
 	while(true)

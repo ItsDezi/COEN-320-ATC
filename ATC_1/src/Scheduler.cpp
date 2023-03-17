@@ -9,6 +9,7 @@ using namespace std;
 Scheduler::Scheduler(Clock* clock_in) {
 	// TODO Auto-generated constructor stub
 	Clock * clk = clock_in;
+	clock_in ->start();
 	  string line,s;
 	  ifstream myfile;
 	  myfile.open("input.txt");
