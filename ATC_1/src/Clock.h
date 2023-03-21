@@ -13,6 +13,7 @@ public:
     void run();
     void start();
     void stop();
+    int count;
 private:
 
 };

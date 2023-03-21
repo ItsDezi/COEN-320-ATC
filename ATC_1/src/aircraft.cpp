@@ -2,21 +2,23 @@
 #include <iostream>
 #include <string>
 #include <string.h>
-
+#include <thread>
+#include "aircraft.h"
 #include "Clock.h"
+#include <chrono>
 using namespace std;
 
-class aircraft{
 string ID;
 //prevClock is to save the last clock value for speed estimations
 int arrivalTime, x ,y ,z , xSpeed, ySpeed, zSpeed, prevClock;
 Clock * clk;
-aircraft() {
+//thread m_thread;
+aircraft::aircraft() {
 	// TODO Auto-generated constructor stub
-
+    //m_thread = std::thread(&Clock::run, this);
 
 }
-aircraft(int arr_time, string id, int x_in, int y_in, int z_in, int speedX, int speedY, int speedZ, Clock * clock_in)
+aircraft::aircraft(int arr_time, string id, int x_in, int y_in, int z_in, int speedX, int speedY, int speedZ, Clock * clock_in)
 {
 	arrivalTime = arr_time;
 	prevClock = arrivalTime;
@@ -28,13 +30,14 @@ aircraft(int arr_time, string id, int x_in, int y_in, int z_in, int speedX, int 
 	ySpeed = speedY;
 	zSpeed = speedZ;
 	clk = clock_in;
+    //m_thread = thread(&aircraft::run);
 }
 
-~aircraft() {
+aircraft::~aircraft() {
 	// TODO Auto-generated destructor stub
 }
 
-void test_print()
+void aircraft::test_print()
 {
 	cout<<"\nArrival Time: "<< arrivalTime;
 	cout<<"\nID: "<< ID;
@@ -45,17 +48,30 @@ void test_print()
 	cout<<"\nY Speed: "<< ySpeed;
 	cout<<"\nZ Speed: "<< zSpeed;
 }
-void updatePosition()//
+void aircraft::updatePosition()//
 {
-	/*t = clk. - prevClock;
-    x = x + xSpeed * t;
-    y = y + ySpeed * t;
-    z = z + zSpeed * t;*/
+	//this->test_print();
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	cout<<"\nupdatePosition is being called!";
+	int t = clk->count - prevClock;
+	prevClock = clk->count;
+    x = x + (xSpeed * t)/1000;//dividing by 1000 because we are dealing with ms
+    y = y + (ySpeed * t)/1000;
+    z = z + (zSpeed * t)/1000;
+    cout<<"\n clock count: "<< clk->count;
+	this->test_print();
+	cout<<"\nthread ID: "<<std::this_thread::get_id();
 }
 
-void changeSpeed()//when commands are received from the operator console
+void aircraft::changeSpeed()//when commands are received from the operator console
 {
 
 }
-};
+void aircraft::run()
+{
+	while(1 != 0)
+	{
+		this -> updatePosition();
+	}
+}
 

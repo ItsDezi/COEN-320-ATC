@@ -4,11 +4,12 @@
 #include <string>
 #include <string.h>
 #include <list>
+#include "aircraft.h"
 using namespace std;
 
 Scheduler::Scheduler(Clock* clock_in) {
 	// TODO Auto-generated constructor stub
-	Clock * clk = clock_in;
+	clk = clock_in;
 	clock_in ->start();
 	  string line,s;
 	  ifstream myfile;
@@ -33,7 +34,7 @@ Scheduler::~Scheduler() {
 	// TODO Auto-generated destructor stub
 }
 
-void create_aircraft(string s)
+void Scheduler::create_aircraft(string s)
 {
 	string ID;
 	int time, x, y, z, speedX, speedY, speedZ;
@@ -53,55 +54,61 @@ void create_aircraft(string s)
 	}
 	time = stoi(s.substr(0,comma_locations.back()));
 	int temp = comma_locations.back();
-	cout<<'\n'<<"time: "<<time;
+	//cout<<'\n'<<"time: "<<time;
 
 	comma_locations.pop_back();
 
 	int len = comma_locations.back()-temp-1;
 	ID = s.substr(temp+1, len);
-	cout<<'\n'<<"ID: "<<ID;
+	//cout<<'\n'<<"ID: "<<ID;
 	temp = comma_locations.back();
 
 	comma_locations.pop_back();
 
 	len = comma_locations.back()-temp-1;
 	x = stoi(s.substr(temp+1, len));
-	cout<<'\n'<<"X: "<<x;
+	//cout<<'\n'<<"X: "<<x;
 	temp = comma_locations.back();
 
 	comma_locations.pop_back();
 
 	len = comma_locations.back()-temp-1;
 	 y= stoi(s.substr(temp+1, len));
-	cout<<'\n'<<"Y: "<<y;
+	//cout<<'\n'<<"Y: "<<y;
 	temp = comma_locations.back();
 
 	comma_locations.pop_back();
 
 	len = comma_locations.back()-temp-1;
 	z = stoi(s.substr(temp+1, len));
-	cout<<'\n'<<"Z: "<<z;
+	//cout<<'\n'<<"Z: "<<z;
 	temp = comma_locations.back();
 
 	comma_locations.pop_back();
 
 	len = comma_locations.back()-temp-1;
 	speedX = stoi(s.substr(temp+1, len));
-	cout<<'\n'<<"Speed X: "<<speedX;
+	//cout<<'\n'<<"Speed X: "<<speedX;
 	temp = comma_locations.back();
 
 	comma_locations.pop_back();
 
 	len = comma_locations.back()-temp-1;
 	 speedY= stoi(s.substr(temp+1, len));
-	cout<<'\n'<<"Speed Y: "<<speedY;
+	//cout<<'\n'<<"Speed Y: "<<speedY;
 	temp = comma_locations.back();
 
 	comma_locations.pop_back();
 
 	len = comma_locations.back()-temp-1;
 	speedZ = stoi(s.substr(temp+1, len));
-	cout<<'\n'<<"Speed Z: "<<speedZ;
+	//cout<<'\n'<<"Speed Z: "<<speedZ;
 	temp = comma_locations.back();
 
+	aircraft a = aircraft(time, ID, x, y, z, speedX, speedY, speedZ, clk);
+	thread t(&aircraft::run,a);
+	t.join();
+	//thread h(a.updatePosition(),a);
+	//a.test_print();
+	//thread a(aircraft(),(time, ID, x, y, z, speedX, speedY, speedZ));//might need to pass params later to give instructions to aircrafts
 }
