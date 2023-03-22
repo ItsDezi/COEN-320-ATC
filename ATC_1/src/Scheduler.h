@@ -5,21 +5,26 @@
 #include <string>
 #include <string.h>
 #include <list>
-#include "Clock.h"
 #include <chrono>
-#include <thread>
+#include <pthread.h>
+#include "aircraft.h"
+#include "Timer.h"
 using namespace std;
 
 void create_aircraft(string s);
 
 class Scheduler {
 public:
-	Clock * clk;
-	Scheduler(Clock* clock_in);
+	Timer * clk;
+	//pthread_t[] aircraft_threads;//list of all active aircraft threads to update periodically
+	//pthread_t[] unreadyAircrafts
+	Scheduler(Timer &clock_in);
+	void ting();
+	void sortAircraftList(vector<aircraft>& myList);
 	//const create_aircraft();
 	virtual ~Scheduler();
-	void create_aircraft(string s);
-
+	aircraft create_aircraft(string s);
+	static void* run_aircraft_update_position(void* arg);
 };
 
 #endif /* SRC_SCHEDULER_H_ */

@@ -10,24 +10,29 @@
 #include <iostream>
 #include <string>
 #include <string.h>
-#include <thread>
+#include <pthread.h>
 #include "aircraft.h"
-#include "Clock.h"
 #include <chrono>
+#include "AircraftData.h"
+#include "Timer.h"
+#include <unistd.h>
 using namespace std;
 
 class aircraft {
 public:
-	Clock * clk;
-	string ID;
+	Timer * clk;
+	int ID;
 	//thread m_thread;
 	aircraft();
+	pthread_t thread;
 	virtual ~aircraft();
-	aircraft(int arr_time, string id, int x_in, int y_in, int z_in, int speedX, int speedY, int speedZ, Clock * clock_in);
+	AircraftData data;
+	double prevClock;
+	aircraft(AircraftData dataTing, Timer &clock_in);
 	void test_print();
-	void updatePosition();
+	void* updatePosition();
 	void changeSpeed();
-	void run();
+	static void* run(void *a);
 
 };
 
