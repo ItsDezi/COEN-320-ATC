@@ -44,24 +44,24 @@ void aircraft::test_print()
 	cout<<"\nY Speed: "<< data.ySpeed;
 	cout<<"\nZ Speed: "<< data.zSpeed;
 }
-void* aircraft::updatePosition()//
+ void* aircraft::updatePosition(void* args)//
 {
-	//aircraft* c = (aircraft*) b;
+	aircraft* a = (aircraft*) args;
 	//aircraft a = *c;
-	aircraft *a = this;
+	//aircraft *a = this;
 	//this->test_print();
-	a->test_print();
+	//a->test_print();
 	cout<<"\nupdatePosition is being called!";
     //sleep(2);
 	int t = a->clk->count - a->prevClock;//PROBLEM?!?!?!?!?
-    cout<<"\n clock from aircraft is: "<< a->clk->elapsed();
-    cout<<"\n previous clock count: "<< a->prevClock;
+    //cout<<"\n clock from aircraft is: "<< a->clk->elapsed();
+    //cout<<"\n previous clock count: "<< a->prevClock;
 	a->prevClock = a->clk->elapsed();
 	a->data.x = a->data.x + (a->data.xSpeed * t)/1000;//dividing by 1000 because we are dealing with ms
 	a->data.y = a->data.y + (a->data.ySpeed * t)/1000;
 	a->data.z = a->data.z + (a->data.zSpeed * t)/1000;
 	//a->test_print();
-	cout<<"\nthread ID: "<<pthread_self();
+	//cout<<"\nthread ID: "<<pthread_self();
 }
 
 void aircraft::changeSpeed()//when commands are received from the operator console

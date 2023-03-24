@@ -30,7 +30,7 @@ public:
 	double prevClock;
 	aircraft(AircraftData dataTing, Timer &clock_in);
 	void test_print();
-	void* updatePosition();
+	static void* updatePosition(void* args);
 	void changeSpeed();
 	static void* run(void *a);
 

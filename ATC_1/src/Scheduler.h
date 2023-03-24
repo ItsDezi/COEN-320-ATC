@@ -1,6 +1,7 @@
 #ifndef SRC_SCHEDULER_H_
 #define SRC_SCHEDULER_H_
 #include <iostream>
+#include <vector>
 #include <fstream>
 #include <string>
 #include <string.h>
@@ -16,11 +17,12 @@ void create_aircraft(string s);
 class Scheduler {
 public:
 	Timer * clk;
+	vector<aircraft> aircrafts;
 	//pthread_t[] aircraft_threads;//list of all active aircraft threads to update periodically
 	//pthread_t[] unreadyAircrafts
 	Scheduler(Timer &clock_in);
 	void ting();
-	void sortAircraftList(vector<aircraft>& myList);
+	aircraft *sortAircraftList(vector<aircraft> myList);
 	//const create_aircraft();
 	virtual ~Scheduler();
 	aircraft create_aircraft(string s);

@@ -6,6 +6,7 @@
 #include <list>
 #include "aircraft.h"
 #include <vector>
+#include <array>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ Scheduler::Scheduler(Timer &clock_in) {
 	// TODO Auto-generated constructor stub
 	clk = &clock_in;
 	//sleep(2.4);
-	vector<aircraft> aircrafts;
+	//vector<aircraft> aircrafts;
 	cout<<"\n scheduler constructor called at: "<<clk->elapsed()<<"\n";
 	//clock_in ->set_timer(0, 0, 1, 0);
 	//pthread_join(clock_in->m_thread, NULL); // wait for the thread to complete
@@ -37,8 +38,17 @@ Scheduler::Scheduler(Timer &clock_in) {
 	  }
 
 	  else cout << "Unable to open file";
-
-	  sortAircraftList(aircrafts);
+		for(int i = 0; i< aircrafts.size();i++)
+		{
+			sleep(0.2);
+			cout<<"\nID: "<<aircrafts[i].data.ID<< "\n";
+		}
+		  sort( aircrafts.begin(), aircrafts.end(), []( aircraft &a, aircraft &b){ return (a.data.arrivalTime < b.data.arrivalTime);});
+	  //aircraft sss[aircrafts.size()];
+	  /*aircraft* sss = sortAircraftList(aircrafts);
+	   for(int i = 0; i<2; i++) {
+	      cout <<sss[i].data.arrivalTime<<"\t";
+	   }*/
 		//aircraft *b;
 		//b=&a;
 		//thread t(&aircraft::run,a);
@@ -54,6 +64,12 @@ void Scheduler::ting()
 	{
 		sleep(1);
 		cout<<"\nElapsed time from scheduler:"<<clk->elapsed()<<"\n";
+		for(int i = 0; i< aircrafts.size();i++)
+		{
+			cout<<"\nID: "<<aircrafts[i].data.ID<< "\n";
+
+		}
+
 	}
 }
 aircraft Scheduler::create_aircraft(string s)
@@ -130,37 +146,34 @@ aircraft Scheduler::create_aircraft(string s)
 	AircraftData d;
 	d = (AircraftData){.ID = ID, .arrivalTime = time, .x = x , .y = y , .z = z , .xSpeed = speedX, .ySpeed = speedY, .zSpeed = speedZ};
 	aircraft a = aircraft(d, *clk);
-	pthread_t aircraftThread;
-    pthread_create(&aircraftThread, NULL, &run_aircraft_update_position, &a);
-    pthread_join(aircraftThread, NULL);
-	//thread.join();
-	//thread h(a.updatePosition(),a);
-	//a.test_print();
-	//thread a(aircraft(),(time, ID, x, y, z, speedX, speedY, speedZ));//might need to pass params later to give instructions to aircrafts
+	sleep(2);
+    pthread_create(&a.thread, NULL, aircraft::updatePosition, &a);//at this moment, aircrafts recieve the clock reference properly!
+
+    return a;
 }
 
   void* Scheduler::run_aircraft_update_position(void* arg) {
     aircraft* obj = static_cast<aircraft*>(arg);
     //aircraft *obj2 =
-    obj->updatePosition();
+//    obj->updatePosition();
     return nullptr;
 }
 
-  void Scheduler::sortAircraftList(vector<aircraft>& myList) {
+  aircraft* Scheduler::sortAircraftList(vector<aircraft> myList) {
 	   int i, j,pass=0;
 	   aircraft temp;
-	   aircraft a[myList.size()-1];
-	   for(i = 0; i<myList.size()-1; i++)
+	   aircraft a[myList.size()];
+	   for(i = 0; i<myList.size(); i++)
 	   {
 		   a[i] = myList[i];
 	   }
 	   cout <<"Input list ...\n";
-	   for(i = 0; i<myList.size()-1; i++) {
+	   for(i = 0; i<myList.size(); i++) {
 	      cout <<a[i].data.arrivalTime<<"\t";
 	   }
 	cout<<endl;
-	for(i = 0; i<myList.size()-1; i++) {
-	   for(j = i+1; j<10; j++)
+	for(i = 0; i<myList.size(); i++) {
+	   for(j = i+1; j<myList.size(); j++)
 	   {
 	      if(a[j].data.arrivalTime < a[i].data.arrivalTime) {
 	         temp = a[i];
@@ -170,4 +183,6 @@ aircraft Scheduler::create_aircraft(string s)
 	   }
 	pass++;
 	}
+
+	return a;
   }
