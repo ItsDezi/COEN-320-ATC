@@ -5,8 +5,7 @@
 #include <string>
 #include <queue>
 #include <pthread.h>
-#include <queue>
-#include <pthread.h>
+
 
 class OperatorConsole {
 public:
