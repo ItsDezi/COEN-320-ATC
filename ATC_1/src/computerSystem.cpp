@@ -7,6 +7,7 @@ using namespace std;
 
 //Constructor:
 // this is the function that must be used when I have the radar class from beshoi's code
+/*
 ComputerSystem::ComputerSystem(Radar& radar, int numberAircrafts, int periodicComputations ) {
 
     //Retrieve Information about aircraft from radar: 
@@ -18,7 +19,7 @@ ComputerSystem::ComputerSystem(Radar& radar, int numberAircrafts, int periodicCo
             aircraft[i].position_y = info.position_y;
             aircraft[i].position_z = info.position_z;
         }
-        periodicComputations =  periodicComputations;
+        //periodicComputations =  periodicComputations;
         falseFlag = false;
  }
 
@@ -63,3 +64,4 @@ void ComputerSystem::computeViolations(){
 
 
 
+*/

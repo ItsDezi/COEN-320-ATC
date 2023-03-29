@@ -12,11 +12,11 @@ struct Aircraft {
     int position_x;
     int position_y;
     int position_z; 
-}
+};
 
 
 class ComputerSystem {
-
+/*
 private:
 
 	//To calculate and detect Violations
@@ -52,7 +52,7 @@ public:
 
 	//constructor:
     //We need to know the number of aircrafts in the air to determine if any violations occur 
-	ComputerSystem(int numberAircrafts,int periodicComputations);
+	ComputerSystem(Radar& radar, int numberAircrafts,int periodicComputations);
 
 	//Destructor:
 	~ComputerSystem();
@@ -63,7 +63,7 @@ public:
     //To stop the thread for periodic computations to detect violation
     void stopPeriodicComputations(); 
 
-
+*/
 
 };
 
