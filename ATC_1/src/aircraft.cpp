@@ -6,7 +6,7 @@
 #include "aircraft.h"
 #include <chrono>
 
-#include "cTimer.h"
+
 using namespace std;
 
 //string ID;
@@ -62,6 +62,9 @@ void aircraft::test_print()
 	a->data.z = a->data.z + (a->data.zSpeed * t)/1000;
 	//a->test_print();
 	//cout<<"\nthread ID: "<<pthread_self();
+
+
+
 }
 
 void aircraft::changeSpeed()//when commands are received from the operator console

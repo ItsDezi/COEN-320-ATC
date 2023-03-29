@@ -8,7 +8,6 @@
 #endif
 #include<iostream>
 #include "Scheduler.h"
-#include "cTimer.h"
 #include "Timer.h"
 
 using namespace std;
