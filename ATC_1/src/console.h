@@ -26,8 +26,5 @@ private:
 
     static pthread_mutex_t mutex;
     
-    static std::queue<ConsoleResponse> responseMessages;//operates on a first-in, first-out (FIFO) basis.//By using a queue to store response messages, the OperatorConsole object can process messages in the order they were received, and ensure that each message is processed exactly once. 
-                                                                   //The responseMessages variable is accessed by multiple threads, which is why it is protected by a mutex to prevent synchronization issues.
-
-    static void* readInput(void* arg); //reads user input from the console. 
+   
 }
