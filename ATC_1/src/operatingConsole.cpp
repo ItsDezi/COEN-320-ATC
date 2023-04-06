@@ -10,7 +10,7 @@ void OperatingConsole::run() {
     Command command;
 
     // Read input from the user
-    cout << "Enter 0 to read object, 1 to change object: ";
+    cout << "Enter 0 to read object, 1 to change object: "<< endl;
     cin >> command.readOrChange;
     
     cout << "Enter attribute to read or change:\n";
@@ -19,11 +19,11 @@ void OperatingConsole::run() {
     cout << "3 - z\n";
     cin >> command.attributes;
 
-    cout << "Enter aircraft ID: ";
+    cout << "Enter aircraft ID: "<< endl;
     cin >> command.ID;
 
     if (command.readOrChange == 1) {
-        cout << "Enter new value: ";
+        cout << "Enter new value: "<< endl;
         cin >> command.newValue;
     }
     
